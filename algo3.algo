@@ -1,0 +1,32 @@
+PROCEDURE DotProduct(VAR ps:INTEGER, v1,v2 : ARRAY_OF INTEGER)
+VAR
+    i:INTEGER;
+    ps:=0;
+    
+BEGIN
+    IF (v2.length<>v1.length) THEN
+        write("we can't calculate the product");
+        return ps:=nan;
+    END_IF
+    FOR i FROM 0 TO v1.length-1 STEP 1  DO
+        ps:=ps+v1[i]*v2[i];
+    END_FOR
+    return ps;
+END
+
+
+ALGORITHM orthogonal_vector
+VAR
+    vector:ARRAY_OF ARRAY;
+    ps: INTEGER;
+    i,j:INTEGER;
+BEGIN
+    FOR i FROM 0 TO vector.length-1 STEP 1  DO
+        FOR j FROM i+1 TO vector.length-2 STEP 1  DO
+            DotProduct(ps, vector[i], vector[j]);
+            IF (ps=0) THEN
+                write(vector[i], "and", vector[j],"are orthogonal");
+            END_IF
+        END_FOR
+    END_FOR
+END
